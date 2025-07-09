@@ -57,6 +57,116 @@ def faq_search_ui(faqs):
         else:
             st.warning("No matching FAQs found.")
 
+# ---------- sample legal document ---------------
+def legal_samples_ui():
+    st.subheader("📄 Sample Legal Documents for Learning")
+
+    options = ["RTI Application", "Consumer Complaint", "Tenancy Notice","Harassment Complaint"]
+    choice = st.selectbox("Choose a sample to view:", options)
+
+    if choice == "RTI Application":
+        st.markdown("### 📝 RTI Application Sample")
+        st.code("""
+To,
+The Public Information Officer,
+[Department Name],
+[Office Address]
+
+Subject: Request for information under the Right to Information Act, 2005
+
+Sir/Madam,
+
+I hereby request the following information under Section 6(1) of the RTI Act:
+
+1. [Specify information required]
+2. [Specify additional points if needed]
+
+I have paid the application fee of Rs. 10 via [mode of payment].
+
+Kindly provide the information within 30 days as stipulated under the RTI Act.
+
+Thank you.
+
+Sincerely,
+[Your Name]
+[Your Contact Details]
+[Date]
+        """, language='text')
+
+    elif choice == "Consumer Complaint":
+        st.markdown("### 📝 Consumer Complaint Sample")
+        st.code("""
+To,
+The Consumer Dispute Redressal Forum,
+[Forum Address]
+
+Subject: Complaint against defective product/service
+
+Sir/Madam,
+
+I wish to lodge a complaint regarding [details of product/service], which I purchased on [date] from [seller details]. The product/service has the following issues: [list issues].
+
+Despite contacting the seller for resolution, the issue remains unresolved.
+
+I request your office to kindly take necessary action and provide appropriate relief.
+
+Thank you.
+
+Sincerely,
+[Your Name]
+[Your Contact Details]
+[Date]
+        """, language='text')
+
+    elif choice == "Harassment Complaint":
+        st.markdown("### 📝 Police Complaint for Harassment Sample")
+        st.code("""To,
+The Station House Officer,
+[Police Station Name],
+[Station Address]
+
+Subject: Complaint against harassment
+
+Sir/Madam,
+
+I wish to file a complaint regarding harassment faced by me from [mention the person/situation briefly] on [date and location].
+
+I request you to kindly register my complaint and take necessary action.
+
+Thank you.
+
+Sincerely,
+[Your Name]
+[Your Contact Details]
+[Date]
+    """, language='text')
+
+
+    elif choice == "Tenancy Notice":
+        st.markdown("### 📝 Tenancy Notice Sample")
+        st.code("""
+To,
+[Landlord Name],
+[Landlord Address]
+
+Subject: Notice regarding tenancy
+
+Sir/Madam,
+
+I am writing to inform you regarding [rent increase / eviction / maintenance issues] as per our rental agreement dated [date].
+
+[Describe your concern clearly].
+
+Kindly take necessary action within [time period].
+
+Thank you.
+
+Sincerely,
+[Your Name]
+[Your Address]
+[Date]
+        """, language='text')
+
 # Document Generator (Drishti)
 def generate_legal_notice(user_data):
     template_path = "templates/legal_notice_template.docx"
@@ -118,6 +228,8 @@ def main():
             show_random_faq(faqs)
         st.markdown("---")
         faq_search_ui(faqs)
+        st.markdown("---")
+        legal_samples_ui()
 
 if __name__ == "__main__":
     main()
