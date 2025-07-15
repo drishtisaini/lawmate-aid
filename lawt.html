@@ -6,25 +6,100 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LawMate - AI Legal Aid Assistant</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+               /* Animation for continuous rightward movement (content appears from left, moves right) */
+        @keyframes scrollRightward {
+            from {
+                /* Start off-screen to the left by the total width of the content */
+                transform: translateX(calc(-1 * var(--scroll-width)));
+            }
+            to {
+                /* Move to the original position */
+                transform: translateX(0);
+            }
+        }
+
+        .scroll-wrapper {
+            overflow: hidden; /* Hides content outside the wrapper */
+            position: relative; /* Essential for containing the scrolling element */
+            padding: 0 1rem; /* Optional: adds a little space on the left/right edges of the visible area */
+        }
+
+        .scroll-container {
+            display: flex;
+            white-space: nowrap; /* Ensures all cards stay on a single line */
+            /* Apply the animation using CSS variables */
+            animation: scrollRightward var(--scroll-duration) linear infinite;
+            animation-play-state: running; /* Ensure animation is active by default */
+
+            /* Initial transform to correctly position for the rightward animation start.
+               This makes the duplicated content align at the left edge of the viewport. */
+            transform: translateX(calc(-1 * var(--scroll-width)));
+
+            /* Set a consistent gap between flex items */
+            gap: 24px; /* Matches Tailwind's gap-6 */
+        }
+
+        .scroll-container:hover {
+            animation-play-state: paused; /* Pause animation on hover */
+        }
+
+
+        /* Styling for individual cards within the scroll */
+        .scroll-card {
+            flex-shrink: 0; /* Prevent cards from shrinking */
+            /* Define card width for responsiveness */
+            width: 30vw; /* Try around 30-40vw for larger cards on desktop */
+            max-width: 380px; /* Limit maximum width for very large screens */
+            min-width: 280px; /* Ensure a minimum width for readability on smaller screens */
+
+            /* Tailwind-like styles for appearance (re-applied for clarity and if removed from HTML) */
+            padding: 1.5rem; /* Adjust internal padding for bigger feel */
+            background-color: white;
+            color: black;
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+            text-align: center;
+            box-sizing: border-box; /* Ensures padding and border are included in the width calculation */
+        }
+
+        /* Media query for smaller screens: make cards wider */
+        @media (max-width: 768px) {
+            .scroll-card {
+                width: 75vw; /* Make cards wider on smaller screens to fill more space */
+                max-width: none; /* No max-width on mobile */
+                min-width: 250px;
+            }
+            .scroll-wrapper {
+                 padding: 0 0.5rem; /* Reduce padding on small screens */
+            }
+        }
+
+    </style>
 </head>
 
 <body class="bg-gray-50 text-gray-800">
 
     <!-- Hero Section -->
-    <section class="bg-blue-900 text-white py-20 px-6 text-center">
-        <h1 class="text-4xl font-bold mb-4">LawMate: Your AI-Powered Legal Assistant</h1>
-        <p class="text-lg mb-6">Ask legal questions. Get instant answers. Generate legal documents with ease.</p>
-        <div class="space-x-4">
-            <a href="http://localhost:8502" target="_blank">
-                <button class="bg-white text-blue-900 font-semibold py-2 px-4 rounded">
+    <section class="relative py-20 px-6 text-center bg-cover bg-center" style="background-image: url('law.webp');">
+         <!-- Overlay for dark effect -->
+        <div class="absolute inset-0 bg-black opacity-50"></div>
+        <div class="relative z-10 ">
+             <h1 class="text-4xl font-bold mb-4 text-white">LawMate: Your AI-Powered Legal Assistant</h1>
+             <p class="text-lg mb-6 text-white">Ask legal questions. Get instant answers. Generate legal documents with ease.</p>
+             <div class="space-x-4 flex justify-center">
+                 <a href="http://localhost:8502" target="_blank">
+                    <button class="bg-white text-blue-900 font-semibold py-2 px-4 rounded">
                     💬 Start Chat 
-                </button>
-            </a>
+                     </button>
+                 </a>
 
-            <a href="http://localhost:8501" target="_blank">
-                <button class="bg-gray-200 text-blue-900 font-semibold py-2 px-4 rounded">
+                 <a href="http://localhost:8501" target="_blank">
+                     <button class="bg-gray-200 text-blue-900 font-semibold py-2 px-4 rounded">
                     Generate Document
-                </button>
+                     </button>
+                    </a>
+            
 
                 <a href="http://localhost:8501" target="_blank">
                     <button class="bg-gray-100 text-blue-900 font-semibold py-2 px-4 rounded">
@@ -32,36 +107,36 @@
                     </button>
                 </a>
 
-            </a>
+            </div>
 
         </div>
     </section>
 
     <!-- Feature Highlights -->
-    <section class="py-16 px-6">
+    <section class="bg-gray-900 text-white py-16 px-6">
         <h2 class="text-3xl font-bold text-center mb-10">Key Features</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            <div class="bg-white p-6 rounded-lg shadow">
+            <div class="backdrop-blur-md bg-white/10 border border-white/20 shadow-lg rounded-xl p-6">
                 <h3 class="text-xl font-semibold mb-2">🧠 AI Legal Query Assistant</h3>
                 <p>Understands your queries using GPT and provides instant legal responses.</p>
             </div>
-            <div class="bg-white p-6 rounded-lg shadow">
+            <div class="backdrop-blur-md bg-white/10 border border-white/20 shadow-lg rounded-xl p-6">
                 <h3 class="text-xl font-semibold mb-2">📄 Auto Document Generator</h3>
                 <p>Generate legal notices, complaints, and applications instantly.</p>
             </div>
-            <div class="bg-white p-6 rounded-lg shadow">
+            <div class="backdrop-blur-md bg-white/10 border border-white/20 shadow-lg rounded-xl p-6">
                 <h3 class="text-xl font-semibold mb-2">📚 Indian Law Database</h3>
                 <p>Trained on Indian legal FAQs and bare acts to ensure relevance.</p>
             </div>
-            <div class="bg-white p-6 rounded-lg shadow">
+            <div class="backdrop-blur-md bg-white/10 border border-white/20 shadow-lg rounded-xl p-6">
                 <h3 class="text-xl font-semibold mb-2">🧱 Modular & Scalable</h3>
                 <p>Architecture allows future integration with lawyer directories and more.</p>
             </div>
-            <div class="bg-white p-6 rounded-lg shadow">
+            <div class="backdrop-blur-md bg-white/10 border border-white/20 shadow-lg rounded-xl p-6">
                 <h3 class="text-xl font-semibold mb-2">🔒 Error Control</h3>
                 <p>Uses refined prompts and disclaimers to maintain responsible legal guidance.</p>
             </div>
-            <div class="bg-white p-6 rounded-lg shadow">
+            <div class="backdrop-blur-md bg-white/10 border border-white/20 shadow-lg rounded-xl p-6">
                 <h3 class="text-xl font-semibold mb-2">💬 Chatbot Interface</h3>
                 <p>Interactive, easy-to-use chat system for asking legal questions.</p>
             </div>
@@ -69,45 +144,64 @@
     </section>
 
     <!-- How It Works -->
-    <section class="bg-gray-100 py-16 px-6">
+    <section class="bg-gray-900 text-white py-16 px-6">
         <h2 class="text-3xl font-bold text-center mb-10">How It Works</h2>
-        <div class="flex flex-col md:flex-row items-center justify-center space-y-6 md:space-y-0 md:space-x-10">
-            <div class="text-center">
-                <h3 class="text-xl font-semibold mb-2">1️⃣ Ask Your Legal Question</h3>
-                <p>Type your question in natural language.</p>
-            </div>
-            <div class="text-center">
-                <h3 class="text-xl font-semibold mb-2">2️⃣ Get Instant Response</h3>
-                <p>LawMate understands and replies intelligently.</p>
-            </div>
-            <div class="text-center">
-                <h3 class="text-xl font-semibold mb-2">3️⃣ Generate Legal Document</h3>
-                <p>Automatically generate documents like notices or complaints.</p>
-            </div>
-            <div class="text-center">
-                <h3 class="text-xl font-semibold mb-2">4️⃣ Refer to a Lawyer</h3>
-                <p>Get help or guidance if needed.</p>
+        <div class="scroll-wrapper">
+            <div class="scroll-container">
+                <div class="scroll-card">
+                    <h3 class="text-xl font-semibold mb-2">4️⃣ Refer to a Lawyer</h3>
+                    <p>Get help or guidance if needed.</p>
+                </div>
+                <div class="scroll-card">
+                    <h3 class="text-xl font-semibold mb-2">3️⃣ Generate Legal Document</h3>
+                    <p>generate documents e.g. notices/complaints.</p>
+                </div>
+                <div class="scroll-card">
+                    <h3 class="text-xl font-semibold mb-2">2️⃣ Get Instant Response</h3>
+                    <p>LawMate understands and replies intelligently.</p>
+                </div>
+                <div class="scroll-card">
+                    <h3 class="text-xl font-semibold mb-2">1️⃣ Ask Your Legal Question</h3>
+                    <p>Type your question in natural language.</p>
+                </div>
+                <!-- Duplicate content for seamless scrolling -->
+                 <div class="scroll-card">
+                    <h3 class="text-xl font-semibold mb-2">4️⃣ Refer to a Lawyer</h3>
+                    <p>Get help or guidance if needed.</p>
+                </div>
+                <div class="scroll-card">
+                    <h3 class="text-xl font-semibold mb-2">3️⃣ Generate Legal Document</h3>
+                    <p>generate documents like notices/complaints.</p>
+                </div>
+                <div class="scroll-card">
+                    <h3 class="text-xl font-semibold mb-2">2️⃣ Get Instant Response</h3>
+                    <p>LawMate understands and replies intelligently.</p>
+                </div>
+                <div class="scroll-card">
+                    <h3 class="text-xl font-semibold mb-2">1️⃣ Ask Your Legal Question</h3>
+                    <p>Type your question in natural language.</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Use Cases -->
-    <section class="py-16 px-6">
+    <section class="bg-gray-900 text-white py-16 px-6">
         <h2 class="text-3xl font-bold text-center mb-10">Use Cases</h2>
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-5xl mx-auto text-center">
-            <div class="bg-white p-4 rounded shadow">
+            <div class="backdrop-blur-md bg-white/10 border border-white/20 shadow-lg rounded-xl p-6">
                 <h3 class="font-semibold">🏠 Rental Issues</h3>
                 <p class="text-sm">e.g., "My landlord is not returning the deposit. What can I do?"</p>
             </div>
-            <div class="bg-white p-4 rounded shadow">
+            <div class="backdrop-blur-md bg-white/10 border border-white/20 shadow-lg rounded-xl p-6">
                 <h3 class="font-semibold">🛍 Consumer Complaints</h3>
                 <p class="text-sm">e.g., "Can I get a refund for a defective product?"</p>
             </div>
-            <div class="bg-white p-4 rounded shadow">
+            <div class="backdrop-blur-md bg-white/10 border border-white/20 shadow-lg rounded-xl p-6">
                 <h3 class="font-semibold">🏢 Workplace Rights</h3>
                 <p class="text-sm">e.g., "Is it legal to fire someone without notice?"</p>
             </div>
-            <div class="bg-white p-4 rounded shadow">
+            <div class="backdrop-blur-md bg-white/10 border border-white/20 shadow-lg rounded-xl p-6">
                 <h3 class="font-semibold">👩 Women's Rights</h3>
                 <p class="text-sm">e.g., "How to report workplace harassment?"</p>
             </div>
@@ -115,10 +209,58 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-blue-900 text-white py-8 px-6 text-center">
-        <p class="mb-2">LawMate by IGDTUW & Sansoftech</p>
+    <footer class="bg-white-900 text-black py-8 px-6 text-center">
+        <p class="mb-2">lawmate-aid by IGDTUW & Sansoftech</p>
         <p class="text-sm">Disclaimer: LawMate is an AI tool. For legal action, consult a qualified lawyer.</p>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const scrollContainer = document.querySelector('.scroll-container');
+            if (!scrollContainer) {
+                console.warn('Scroll container not found. Animation might not work.');
+                return; // Exit if the container isn't found
+            }
+
+            const scrollCards = document.querySelectorAll('.scroll-container .scroll-card');
+            
+            let totalContentWidth = 0;
+            // The `gap` property in CSS handles spacing between flex items.
+            // We need to calculate the width of all cards combined *without* external margins here,
+            // as the 'gap' property adds space internally.
+            scrollCards.forEach(card => {
+                totalContentWidth += card.offsetWidth; // offsetWidth includes content, padding, border
+            });
+
+            // Adjust for the gaps between cards. If there are N cards, there are (N-1) gaps.
+            // But since flexbox `gap` adds space BETWEEN items, and `offsetWidth` doesn't include it,
+            // we need to add the total gap space to the content width.
+            const numberOfGaps = scrollCards.length > 0 ? scrollCards.length - 1 : 0;
+            const gapSize = 24; // This must match the `gap: 24px;` in your CSS
+            totalContentWidth += (numberOfGaps * gapSize);
+
+
+            // Set CSS variables for animation
+            // --scroll-width: The total width of one full set of content including gaps
+            scrollContainer.style.setProperty('--scroll-width', `${totalContentWidth}px`);
+
+            // Set animation duration based on content width (adjust speed multiplier for desired speed)
+            // Lower speedMultiplier = faster animation, Higher = slower
+            const speedMultiplier = 60; // Pixels per second. Adjust this to control scroll speed.
+            const animationDuration = totalContentWidth / speedMultiplier; // Duration in seconds
+            scrollContainer.style.setProperty('--scroll-duration', `${animationDuration}s`);
+
+            // Capture the innerHTML to be used by the ::after pseudo-element
+            // We escape quotes to ensure the string is valid for CSS content property
+            const escapedContent = JSON.stringify(scrollContainer.innerHTML);
+            scrollContainer.style.setProperty('--scroll-content', escapedContent);
+
+            // Important: Re-apply the initial transform after content is set,
+            // or ensure it's applied after `--scroll-width` is ready.
+            // This line ensures the starting point is correct for the seamless loop.
+            scrollContainer.style.transform = `translateX(calc(-1 * ${totalContentWidth}px))`;
+        });
+    </script>
 
 </body>
 
