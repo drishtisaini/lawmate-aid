@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LawMate - AI Legal Aid Assistant</title>
+    <link rel="icon" href="favicon.png" type="image/jpeg">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
                /* Animation for continuous rightward movement (content appears from left, moves right) */
@@ -78,14 +79,15 @@
     </style>
 </head>
 
-<body class="bg-gray-50 text-gray-800">
+<body class="text-white" style="background-color: #3E729E;">
 
     <!-- Hero Section -->
     <section class="relative py-20 px-6 text-center bg-cover bg-center" style="background-image: url('law.webp');">
          <!-- Overlay for dark effect -->
         <div class="absolute inset-0 bg-black opacity-50"></div>
         <div class="relative z-10 ">
-             <h1 class="text-4xl font-bold mb-4 text-white">LawMate: Your AI-Powered Legal Assistant</h1>
+             <h1 class="text-4xl font-bold mb-4 text-white">LawMate</h1>
+                <h2 class="text-2xl font-semibold mb-2 text-white">Your AI Legal Aid Assistant</h2>
              <p class="text-lg mb-6 text-white">Ask legal questions. Get instant answers. Generate legal documents with ease.</p>
              <div class="space-x-4 flex justify-center">
                  <a href="http://localhost:8502" target="_blank">
@@ -94,15 +96,15 @@
                      </button>
                  </a>
 
-                 <a href="http://localhost:8501" target="_blank">
-                     <button class="bg-gray-200 text-blue-900 font-semibold py-2 px-4 rounded">
+                 <a href="http://localhost:8501/document_generator" target="_blank">
+                     <button class="bg-white text-blue-900 font-semibold py-2 px-4 rounded">
                     Generate Document
                      </button>
                     </a>
             
 
-                <a href="http://localhost:8501" target="_blank">
-                    <button class="bg-gray-100 text-blue-900 font-semibold py-2 px-4 rounded">
+                <a href="http://localhost:8501/faq_search" target="_blank">
+                    <button class="bg-white text-blue-900 font-semibold py-2 px-4 rounded">
                         Search Legal FAQs(use Tab 2)
                     </button>
                 </a>
@@ -113,7 +115,7 @@
     </section>
 
     <!-- Feature Highlights -->
-    <section class="bg-gray-900 text-white py-16 px-6">
+    <section class="text-white py-16 px-6" style="background-color: #3E729E;">
         <h2 class="text-3xl font-bold text-center mb-10">Key Features</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             <div class="backdrop-blur-md bg-white/10 border border-white/20 shadow-lg rounded-xl p-6">
@@ -144,7 +146,7 @@
     </section>
 
     <!-- How It Works -->
-    <section class="bg-gray-900 text-white py-16 px-6">
+    <section class="text-white py-16 px-6" style="background-color: #3E729E;">
         <h2 class="text-3xl font-bold text-center mb-10">How It Works</h2>
         <div class="scroll-wrapper">
             <div class="scroll-container">
@@ -186,7 +188,7 @@
     </section>
 
     <!-- Use Cases -->
-    <section class="bg-gray-900 text-white py-16 px-6">
+    <section class="text-white py-16 px-6" style="background-color: #3E729E;">
         <h2 class="text-3xl font-bold text-center mb-10">Use Cases</h2>
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-5xl mx-auto text-center">
             <div class="backdrop-blur-md bg-white/10 border border-white/20 shadow-lg rounded-xl p-6">
@@ -209,7 +211,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-white-900 text-black py-8 px-6 text-center">
+    <footer class="bg-white text-gray-900 py-8 px-6 text-center">
         <p class="mb-2">lawmate-aid by IGDTUW & Sansoftech</p>
         <p class="text-sm">Disclaimer: LawMate is an AI tool. For legal action, consult a qualified lawyer.</p>
     </footer>
@@ -246,7 +248,7 @@
 
             // Set animation duration based on content width (adjust speed multiplier for desired speed)
             // Lower speedMultiplier = faster animation, Higher = slower
-            const speedMultiplier = 60; // Pixels per second. Adjust this to control scroll speed.
+            const speedMultiplier = 150; // Pixels per second. Adjust this to control scroll speed.
             const animationDuration = totalContentWidth / speedMultiplier; // Duration in seconds
             scrollContainer.style.setProperty('--scroll-duration', `${animationDuration}s`);
 

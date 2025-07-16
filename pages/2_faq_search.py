@@ -1,24 +1,11 @@
 import streamlit as st
 import json
-import datetime
 import random
-import os
-from docxtpl import DocxTemplate
 
-# Page settings
-st.set_page_config(page_title="LawMate: AI Legal Assistant", layout="centered", page_icon="⚖️")
-
-# Sidebar
-st.sidebar.title("About LawMate")
-st.sidebar.info(
-    "LawMate is an AI-powered legal FAQ assistant for basic Indian legal awareness.\n\n"
-    "It helps you generate legal notices and find answers to common legal questions quickly.\n\n"
-    "**Disclaimer:** This tool provides general legal information and is not a substitute for professional legal advice."
-)
-
-# Load FAQs from JSON
+# Load FAQs from JSON (make sure law_faqs.json is in the main_app_directory)
 def load_faqs(file_path='law_faqs.json'):
     try:
+        # Adjust path if needed for deployment, but for local run from lawmate_app/ it's fine.
         with open(file_path, 'r', encoding='utf-8') as f:
             return json.load(f)
     except Exception as e:
@@ -57,7 +44,7 @@ def faq_search_ui(faqs):
         else:
             st.warning("No matching FAQs found.")
 
-# ---------- sample legal document ---------------
+# Sample legal document UI
 def legal_samples_ui():
     st.subheader("📄 Sample Legal Documents for Learning")
 
@@ -78,8 +65,9 @@ Sir/Madam,
 
 I hereby request the following information under Section 6(1) of the RTI Act:
 
-1. [Specify information required]
-2. [Specify additional points if needed]
+[Specify information required]
+
+[Specify additional points if needed]
 
 I have paid the application fee of Rs. 10 via [mode of payment].
 
@@ -91,7 +79,7 @@ Sincerely,
 [Your Name]
 [Your Contact Details]
 [Date]
-        """, language='text')
+""", language='text')
 
     elif choice == "Consumer Complaint":
         st.markdown("### 📝 Consumer Complaint Sample")
@@ -116,7 +104,7 @@ Sincerely,
 [Your Name]
 [Your Contact Details]
 [Date]
-        """, language='text')
+""", language='text')
 
     elif choice == "Harassment Complaint":
         st.markdown("### 📝 Police Complaint for Harassment Sample")
@@ -139,8 +127,7 @@ Sincerely,
 [Your Name]
 [Your Contact Details]
 [Date]
-    """, language='text')
-
+""", language='text')
 
     elif choice == "Tenancy Notice":
         st.markdown("### 📝 Tenancy Notice Sample")
@@ -165,71 +152,15 @@ Sincerely,
 [Your Name]
 [Your Address]
 [Date]
-        """, language='text')
+""", language='text')
 
-# Document Generator (Drishti)
-def generate_legal_notice(user_data):
-    template_path = "templates/legal_notice_template.docx"
-    doc = DocxTemplate(template_path)
-    doc.render(user_data)
-
-    output_dir = "generated_docs"
-    os.makedirs(output_dir, exist_ok=True)
-    output_path = os.path.join(output_dir, f"{user_data['sender_name'].replace(' ', '_')}_legal_notice.docx")
-    doc.save(output_path)
-
-    return output_path
-
-# ----------------- MAIN APP -------------------
-
-def main():
-     
-    tab1, tab2 = st.tabs(["📄 Generate Legal Document", "💬 Search Legal FAQs"])
-
-    with tab1:
-        st.header("📄 Generate Legal Notice")
-        with st.form("notice_form"):
-            sender_name = st.text_input("Your Full Name")
-            sender_address = st.text_area("Your Address")
-            recipient_name = st.text_input("Recipient's Name")
-            recipient_address = st.text_area("Recipient's Address")
-            subject = st.text_input("Subject of the Notice")
-            issue_description = st.text_area("Describe the Issue")
-            notice_period = st.number_input("Notice Period (days)", min_value=1, max_value=60, value=15)
-            date = st.date_input("Date", value=datetime.date.today())
-            submitted = st.form_submit_button("Generate Document")
-
-        if submitted:
-            user_data = {
-                "sender_name": sender_name,
-                "sender_address": sender_address,
-                "recipient_name": recipient_name,
-                "recipient_address": recipient_address,
-                "subject": subject,
-                "issue_description": issue_description,
-                "notice_period": notice_period,
-                "date": date.strftime("%B %d, %Y")
-            }
-            file_path = generate_legal_notice(user_data)
-            st.success("✅ Legal notice created successfully!")
-            with open(file_path, "rb") as file:
-                st.download_button(
-                    label="📥 Download Your Legal Notice",
-                    data=file,
-                    file_name=os.path.basename(file_path),
-                    mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                )
-
-    with tab2:
-        st.header("💬 Legal FAQs")
-        faqs = load_faqs()
-        st.markdown("---")
-        if st.button("🎲 Show Random FAQ"):
-            show_random_faq(faqs)
-        st.markdown("---")
-        faq_search_ui(faqs)
-        st.markdown("---")
-        legal_samples_ui()
-
-if __name__ == "__main__":
-    main()
+st.header("💬 Legal FAQs")
+faqs = load_faqs()
+st.markdown("---")
+if st.button("🎲 Show Random FAQ"):
+    show_random_faq(faqs)
+st.markdown("---")
+faq_search_ui(faqs)
+st.markdown("---")
+legal_samples_ui()
+  
