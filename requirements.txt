@@ -3,3 +3,4 @@ docxtpl
 requests
 SpeechRecognition
 pyaudio
+python-dotenv
