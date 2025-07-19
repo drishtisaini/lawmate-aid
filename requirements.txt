@@ -1,0 +1,5 @@
+streamlit
+docxtpl
+requests
+SpeechRecognition
+pyaudio
