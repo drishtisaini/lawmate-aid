@@ -8,12 +8,13 @@
     <link rel="icon" href="favicon.png" type="image/jpeg">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
-               /* Animation for continuous rightward movement (content appears from left, moves right) */
+        /* Animation for continuous rightward movement (content appears from left, moves right) */
         @keyframes scrollRightward {
             from {
                 /* Start off-screen to the left by the total width of the content */
                 transform: translateX(calc(-1 * var(--scroll-width)));
             }
+
             to {
                 /* Move to the original position */
                 transform: translateX(0);
@@ -21,91 +22,114 @@
         }
 
         .scroll-wrapper {
-            overflow: hidden; /* Hides content outside the wrapper */
-            position: relative; /* Essential for containing the scrolling element */
-            padding: 0 1rem; /* Optional: adds a little space on the left/right edges of the visible area */
+            overflow: hidden;
+            /* Hides content outside the wrapper */
+            position: relative;
+            /* Essential for containing the scrolling element */
+            padding: 0 1rem;
+            /* Optional: adds a little space on the left/right edges of the visible area */
         }
 
         .scroll-container {
             display: flex;
-            white-space: nowrap; /* Ensures all cards stay on a single line */
+            white-space: nowrap;
+            /* Ensures all cards stay on a single line */
             /* Apply the animation using CSS variables */
             animation: scrollRightward var(--scroll-duration) linear infinite;
-            animation-play-state: running; /* Ensure animation is active by default */
+            animation-play-state: running;
+            /* Ensure animation is active by default */
 
             /* Initial transform to correctly position for the rightward animation start.
                This makes the duplicated content align at the left edge of the viewport. */
             transform: translateX(calc(-1 * var(--scroll-width)));
 
             /* Set a consistent gap between flex items */
-            gap: 24px; /* Matches Tailwind's gap-6 */
+            gap: 24px;
+            /* Matches Tailwind's gap-6 */
         }
 
         .scroll-container:hover {
-            animation-play-state: paused; /* Pause animation on hover */
+            animation-play-state: paused;
+            /* Pause animation on hover */
         }
 
 
         /* Styling for individual cards within the scroll */
         .scroll-card {
-            flex-shrink: 0; /* Prevent cards from shrinking */
+            flex-shrink: 0;
+            /* Prevent cards from shrinking */
             /* Define card width for responsiveness */
-            width: 30vw; /* Try around 30-40vw for larger cards on desktop */
-            max-width: 380px; /* Limit maximum width for very large screens */
-            min-width: 280px; /* Ensure a minimum width for readability on smaller screens */
+            width: 30vw;
+            /* Try around 30-40vw for larger cards on desktop */
+            max-width: 380px;
+            /* Limit maximum width for very large screens */
+            min-width: 280px;
+            /* Ensure a minimum width for readability on smaller screens */
 
             /* Tailwind-like styles for appearance (re-applied for clarity and if removed from HTML) */
-            padding: 1.5rem; /* Adjust internal padding for bigger feel */
+            padding: 1.5rem;
+            /* Adjust internal padding for bigger feel */
             background-color: white;
             color: black;
-            border-radius: 0.5rem; /* rounded-lg */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+            border-radius: 0.5rem;
+            /* rounded-lg */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            /* shadow-md */
             text-align: center;
-            box-sizing: border-box; /* Ensures padding and border are included in the width calculation */
+            box-sizing: border-box;
+            /* Ensures padding and border are included in the width calculation */
         }
 
         /* Media query for smaller screens: make cards wider */
         @media (max-width: 768px) {
             .scroll-card {
-                width: 75vw; /* Make cards wider on smaller screens to fill more space */
-                max-width: none; /* No max-width on mobile */
+                width: 75vw;
+                /* Make cards wider on smaller screens to fill more space */
+                max-width: none;
+                /* No max-width on mobile */
                 min-width: 250px;
             }
+
             .scroll-wrapper {
-                 padding: 0 0.5rem; /* Reduce padding on small screens */
+                padding: 0 0.5rem;
+                /* Reduce padding on small screens */
             }
         }
 
+        .text-white py-16 px-6 {
+            color: black;
+        }
     </style>
 </head>
 
-<body class="text-white" style="background-color: #3E729E;">
+<body class="text-white" style="background-color: white">
 
     <!-- Hero Section -->
     <section class="relative py-20 px-6 text-center bg-cover bg-center" style="background-image: url('law.webp');">
-         <!-- Overlay for dark effect -->
+        <!-- Overlay for dark effect -->
         <div class="absolute inset-0 bg-black opacity-50"></div>
         <div class="relative z-10 ">
-             <h1 class="text-4xl font-bold mb-4 text-white">LawMate</h1>
-                <h2 class="text-2xl font-semibold mb-2 text-white">Your AI Legal Aid Assistant</h2>
-             <p class="text-lg mb-6 text-white">Ask legal questions. Get instant answers. Generate legal documents with ease.</p>
-             <div class="space-x-4 flex justify-center">
-                 <a href="http://localhost:8502" target="_blank">
+            <h1 class="text-4xl font-bold mb-4 text-white"><b>LawMate</b></h1>
+            <h2 class="text-2xl font-semibold mb-2 text-white">Your AI Legal Aid Assistant</h2>
+            <p class="text-lg mb-6 text-white">Ask legal questions. Get instant answers. Generate legal documents with
+                ease.</p>
+            <div class="space-x-4 flex justify-center">
+                <a href="http://localhost:8502" target="_blank">
                     <button class="bg-white text-blue-900 font-semibold py-2 px-4 rounded">
-                    💬 Start Chat 
-                     </button>
-                 </a>
+                        <b>💬 Start Chat</b>
+                    </button>
+                </a>
 
-                 <a href="http://localhost:8501/document_generator" target="_blank">
-                     <button class="bg-white text-blue-900 font-semibold py-2 px-4 rounded">
-                    Generate Document
-                     </button>
-                    </a>
-            
+                <a href="http://localhost:8501/document_generator" target="_blank">
+                    <button class="bg-white text-blue-900 font-semibold py-2 px-4 rounded">
+                        <b> Generate Document</b>
+                    </button>
+                </a>
+
 
                 <a href="http://localhost:8501/faq_search" target="_blank">
                     <button class="bg-white text-blue-900 font-semibold py-2 px-4 rounded">
-                        Search Legal FAQs
+                        <b>Search Legal FAQs</b>
                     </button>
                 </a>
 
@@ -115,38 +139,41 @@
     </section>
 
     <!-- Feature Highlights -->
-    <section class="text-white py-16 px-6" style="background-color: #3E729E;">
-        <h2 class="text-3xl font-bold text-center mb-10">Key Features</h2>
+    <section class="text-white py-16 px-6" style="background-color: white; color: black;">
+        <h2 class="text-3xl font-bold text-center mb-10"><b>Key Features</b></h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             <div class="backdrop-blur-md bg-white/10 border border-white/20 shadow-lg rounded-xl p-6">
-                <h3 class="text-xl font-semibold mb-2">🧠 AI Legal Query Assistant</h3>
+                <h3 class="text-xl font-semibold mb-2"><b> AI Legal Query Assistant</b></h3>
                 <p>Understands your queries using GPT and provides instant legal responses.</p>
             </div>
             <div class="backdrop-blur-md bg-white/10 border border-white/20 shadow-lg rounded-xl p-6">
-                <h3 class="text-xl font-semibold mb-2">📄 Auto Document Generator</h3>
+                <h3 class="text-xl font-semibold mb-2"><b> Auto Document Generator</b></h3>
                 <p>Generate legal notices, complaints, and applications instantly.</p>
             </div>
             <div class="backdrop-blur-md bg-white/10 border border-white/20 shadow-lg rounded-xl p-6">
-                <h3 class="text-xl font-semibold mb-2">📚 Indian Law Database</h3>
+                <h3 class="text-xl font-semibold mb-2"><b> Indian Law Database</b></h3>
                 <p>Trained on Indian legal FAQs and bare acts to ensure relevance.</p>
             </div>
             <div class="backdrop-blur-md bg-white/10 border border-white/20 shadow-lg rounded-xl p-6">
-                <h3 class="text-xl font-semibold mb-2">🧱 Modular & Scalable</h3>
+                <h3 class="text-xl font-semibold mb-2"><b>Modular & Scalable</b></h3>
                 <p>Architecture allows future integration with lawyer directories and more.</p>
             </div>
             <div class="backdrop-blur-md bg-white/10 border border-white/20 shadow-lg rounded-xl p-6">
-                <h3 class="text-xl font-semibold mb-2">🔒 Error Control</h3>
+                <h3 class="text-xl font-semibold mb-2"><b>Error Control</b></h3>
                 <p>Uses refined prompts and disclaimers to maintain responsible legal guidance.</p>
             </div>
             <div class="backdrop-blur-md bg-white/10 border border-white/20 shadow-lg rounded-xl p-6">
-                <h3 class="text-xl font-semibold mb-2">💬 Chatbot Interface</h3>
+                <h3 class="text-xl font-semibold mb-2"><b> Chatbot Interface</b></h3>
                 <p>Interactive, easy-to-use chat system for asking legal questions.</p>
             </div>
         </div>
     </section>
 
+
+
+
     <!-- How It Works -->
-    <section class="text-white py-16 px-6" style="background-color: #3E729E;">
+    <section class="text-white py-16 px-6" style="background-color: rgb(227, 163, 107); color: black;">
         <h2 class="text-3xl font-bold text-center mb-10">How It Works</h2>
         <div class="scroll-wrapper">
             <div class="scroll-container">
@@ -167,7 +194,7 @@
                     <p>Type your question in natural language.</p>
                 </div>
                 <!-- Duplicate content for seamless scrolling -->
-                 <div class="scroll-card">
+                <div class="scroll-card">
                     <h3 class="text-xl font-semibold mb-2">4️⃣ Refer to a Lawyer</h3>
                     <p>Get help or guidance if needed.</p>
                 </div>
@@ -187,37 +214,43 @@
         </div>
     </section>
 
+
+
+
+
     <!-- Use Cases -->
-    <section class="text-white py-16 px-6" style="background-color: #3E729E;">
-        <h2 class="text-3xl font-bold text-center mb-10">Use Cases</h2>
+    <section class="text-white py-16 px-6" style="background-color: white; color: black;">
+        <h2 class="text-3xl font-bold text-center mb-10"><b>Use Cases</b></h2>
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-5xl mx-auto text-center">
             <div class="backdrop-blur-md bg-white/10 border border-white/20 shadow-lg rounded-xl p-6">
-                <h3 class="font-semibold">🏠 Rental Issues</h3>
-                <p class="text-sm">e.g., "My landlord is not returning the deposit. What can I do?"</p>
+                <h3 class="font-semibold"><b> Rental Issues</b></h3>
+                <p class="text-sm">E.g., "My landlord is not returning the deposit. What can I do?"</p>
             </div>
             <div class="backdrop-blur-md bg-white/10 border border-white/20 shadow-lg rounded-xl p-6">
-                <h3 class="font-semibold">🛍 Consumer Complaints</h3>
-                <p class="text-sm">e.g., "Can I get a refund for a defective product?"</p>
+                <h3 class="font-semibold"><b>Consumer Complaints</b></h3>
+                <p class="text-sm">E.g., "Can I get a refund for a defective product?"</p>
             </div>
             <div class="backdrop-blur-md bg-white/10 border border-white/20 shadow-lg rounded-xl p-6">
-                <h3 class="font-semibold">🏢 Workplace Rights</h3>
-                <p class="text-sm">e.g., "Is it legal to fire someone without notice?"</p>
+                <h3 class="font-semibold"><b> Workplace Rights</b></h3>
+                <p class="text-sm">E.g., "Is it legal to fire someone without notice?"</p>
             </div>
             <div class="backdrop-blur-md bg-white/10 border border-white/20 shadow-lg rounded-xl p-6">
-                <h3 class="font-semibold">👩 Women's Rights</h3>
-                <p class="text-sm">e.g., "How to report workplace harassment?"</p>
+                <h3 class="font-semibold"><b> Women's Rights</b></h3>
+                <p class="text-sm">E.g., "How to report workplace harassment?"</p>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="bg-white text-gray-900 py-8 px-6 text-center">
-        <p class="mb-2">© 2025 LawMate. All rights reserved.</p>
+        <p class="mb-2">Design and developed by <a href="">AVNI</a> &nbsp;&nbsp;<a href="">CHHAVI </a> &nbsp;&nbsp;<a
+                href="www.linkedin.com/in/
+drishtisaini5126">DRISHTI SAINI</a> &nbsp;&nbsp;<a href=""> KHUSHI</a>.</p>
         <p class="text-sm">Disclaimer: LawMate is an AI tool. For legal action, consult a qualified lawyer.</p>
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const scrollContainer = document.querySelector('.scroll-container');
             if (!scrollContainer) {
                 console.warn('Scroll container not found. Animation might not work.');
@@ -225,7 +258,7 @@
             }
 
             const scrollCards = document.querySelectorAll('.scroll-container .scroll-card');
-            
+
             let totalContentWidth = 0;
             // The `gap` property in CSS handles spacing between flex items.
             // We need to calculate the width of all cards combined *without* external margins here,
