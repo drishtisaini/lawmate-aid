@@ -3,7 +3,7 @@ import requests
 import speech_recognition as sr
 
 # 🔑 Your API Key
-API_KEY = "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"
+API_KEY = "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"
 MODEL = "mistralai/mixtral-8x7b-instruct"
 
 # ✅ Allowed legal topics
@@ -165,3 +165,4 @@ for role, msg in st.session_state.chat_history:
             </div>
             """, unsafe_allow_html=True)
         message_index += 1
+
