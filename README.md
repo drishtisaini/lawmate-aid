@@ -57,7 +57,7 @@ DocxTemplate for generating DOCX documents
 JSON for storing legal FAQs
 
 ###🌐live demo
-Try it now :[https://chhavic4004.github.io/lawmate/]
+Try it now :[https://chhavic4004.github.io/lawmate_new/]
 
 🛡 Disclaimer
 LawMate is intended for educational and assistance purposes only. It is not a substitute for professional legal advice. Consult a certified lawyer for real-world legal matters.
